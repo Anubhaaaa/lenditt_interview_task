@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+            <label class="lbl-txt">Search By Name</label>
+            <p><input type="text" placeholder="search by name" [(ngModel)]="searchdata"></p>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+            <label class="lbl-txt">Search By Type</label>
+            <p>
+                <select [(ngModel)]="typesearch">
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+            </p>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" style="text-align:center;">
+            <label class="lbl-txt"> Date Range</label>
+            <div class="row">
+                <div class="col-6">
+                    <label>Min Date</label>
+                    <p>
+                        <input type="date" placeholder="search by startDate" [(ngModel)]="startDate">
+                    </p>
+                </div>
+                <div class="col-6">
+                    <label>Max Date</label>
+                    <p>
+                        <input type="date" placeholder="search by endDate" [(ngModel)]="endDate">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 centerClass">
+            <button class="filterBtn" (click)="clearFilter()"><span class="txt">Clear Filter</span></button>
+        </div>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Date
+                    <span *ngIf="sort" (click)="sortData()"><i class="fa fa-chevron-down" style="cursor:pointer;" aria-hidden="true"></i></span>
+                    <span *ngIf="!sort" (click)="sortDataUp()"><i class="fa fa-chevron-up" style="cursor:pointer;"
+                            aria-hidden="true"></i></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let d of data | searchfilter: searchdata | typefilter: typesearch | datefilter :startDate:endDate |paginate: { itemsPerPage: 10, currentPage: p } ;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{d.firstname}}</td>
+                <td>{{d.type}}</td>
+                <td>{{d.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row text-center" style="margin-top:2rem">
+        <pagination-controls (pageChange)="onTableDataChange($event)" class="float-right"></pagination-controls>
+        </div>
+</div>

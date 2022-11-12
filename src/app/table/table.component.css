@@ -1,0 +1,22 @@
+.lbl-txt{
+    font-weight: 600;
+    color: #3e3e3e;
+}
+.filterBtn{
+    border: none;
+    font-size: 13px;
+    padding: 0.5rem;
+    border-radius: 10px;
+    height: 2rem;
+    width: 6rem;
+}
+
+.centerClass{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.txt{
+    position: relative;
+    top: -3px;
+}
